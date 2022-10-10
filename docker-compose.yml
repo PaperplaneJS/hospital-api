@@ -1,16 +1,8 @@
 version: '2'
 services:
-  node:
-    container_name: cfda
-    image: node:12
+  hospital-be:
+    container_name: hospital-be
+    image: paperplanecc/hospital:latest
     user: root
-    working_dir: /home/node/app
-    environment:
-      - NODE_ENV=production
-    volumes:
-      - ./:/home/node/app
     expose:
-      - 9000
-    ports:
-      - 9000:9000
-    command: npx run prod
+      - 5505
