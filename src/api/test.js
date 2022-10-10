@@ -11,7 +11,7 @@ server.get('/test', function (req, res, next) {
 
 server.get('/test-db', async function (req, res, next) {
   const testCollection = db.collection('test')
-  const result = testCollection.find({}).toArray()
+  const result = await testCollection.find({}).toArray()
 
   res.send(result)
 
