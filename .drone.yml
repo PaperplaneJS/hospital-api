@@ -9,9 +9,10 @@ steps:
     image: plugins/docker
     settings:
       username: paperplanecc
-      password: ${DOCKER_ACCESS_TOKEN}
+      password: Gettin3wheels
       repo: paperplanecc/hospital
       debug: true
+      mirror: https://mirror.ccs.tencentyun.com
 
   - name: deploy
     image: appleboy/drone-ssh
