@@ -9,7 +9,7 @@ steps:
     image: plugins/docker
     settings:
       username: paperplanecc
-      password: ${DOCKER_ACCESS_TOKEN}
+      password: dckr_pat_U77IJVpjjTQQd1E8Rl_-OCQbT2Q
       repo: paperplanecc/hospital
 
   - name: deploy
