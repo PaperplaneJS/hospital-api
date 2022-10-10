@@ -9,8 +9,9 @@ steps:
     image: plugins/docker
     settings:
       username: paperplanecc
-      password: dckr_pat_U77IJVpjjTQQd1E8Rl_-OCQbT2Q
+      password: ${DOCKER_ACCESS_TOKEN}
       repo: paperplanecc/hospital
+      debug: true
 
   - name: deploy
     image: appleboy/drone-ssh
