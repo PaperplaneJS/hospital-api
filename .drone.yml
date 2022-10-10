@@ -9,7 +9,7 @@ steps:
     image: plugins/docker
     settings:
       username: paperplanecc
-      password: $DOCKER_ACCESS_TOKEN
+      password: ${DOCKER_ACCESS_TOKEN}
       repo: paperplanecc/hospital
       tags: latest
 
@@ -17,7 +17,7 @@ steps:
     image: appleboy/drone-ssh
     settings:
       username: ubuntu
-      password: $SSH_PASSWORD
+      password: ${SSH_PASSWORD}
       port: 22
       command_timeout: 5m
       script:
