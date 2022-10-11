@@ -13,6 +13,7 @@ steps:
       repo: paperplanecc/hospital
       mirror: https://mirror.ccs.tencentyun.com
       registry: docker.io
+      tags: latest
 
   - name: deploy
     image: appleboy/drone-ssh
