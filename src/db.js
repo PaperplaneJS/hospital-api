@@ -1,12 +1,11 @@
 const { MongoClient } = require('mongodb')
 
+const mongoDBHost = process.env.MONGODB_HOST || 'mongo'
+
 let mongoDB = null
 
 async function connect() {
-  const mongoURL =
-    process.env.NODE_ENV === 'production'
-      ? 'mongodb://root:qwer1234@mongo:27017/'
-      : 'mongodb://root:qwer1234@localhost:27017/'
+  const mongoURL = 'mongodb://root:qwer1234@' + mongoDBHost + ':27017/'
 
   const client = new MongoClient(mongoURL)
   await client.connect()

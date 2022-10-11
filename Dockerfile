@@ -1,4 +1,5 @@
 FROM node:14
+
 ENV NODE_ENV=production
 
 RUN rm -rf /app
@@ -9,5 +10,7 @@ WORKDIR /app
 
 RUN yarn config set registry https://registry.npmmirror.com
 RUN yarn
+
+EXPOSE 5505
 
 CMD [ "node", "./src/app.js" ]

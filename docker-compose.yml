@@ -1,8 +1,10 @@
-version: '2'
+version: '3'
+
 services:
   hospital-be:
     container_name: hospital-be
     image: paperplanecc/hospital:latest
-    user: root
-    expose:
-      - 5505
+    ports:
+      - '5505:5505'
+    extra_hosts:
+      - 'mongo:host-gateway'
