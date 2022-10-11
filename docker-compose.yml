@@ -3,7 +3,7 @@ version: '3'
 services:
   hospital-be:
     container_name: hospital-be
-    image: paperplanecc/hospital:latest
+    image: paperplanecc/hospital-be:latest
     ports:
       - '5505:5505'
     extra_hosts:
