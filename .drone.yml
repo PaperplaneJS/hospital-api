@@ -9,8 +9,8 @@ steps:
     image: plugins/docker
     settings:
       username: paperplanecc
-      password: ${DOCKER_ACCESS_TOKEN}
-      repo: paperplanecc/hospital
+      password: Gettin3wheels
+      repo: paperplanecc/hospital-be
       mirror: https://mirror.ccs.tencentyun.com
       registry: docker.io
       tags: latest
@@ -24,8 +24,8 @@ steps:
       command_timeout: 5m
       script:
         - sudo su
-        - docker pull paperplanecc/hospital
-        - docker run -it -d --name hospital paperplanecc/hospital:latest
+        - docker pull paperplanecc/hospital-be
+        - docker run -it -d --name hospital-be paperplanecc/hospital-be:latest
 
 trigger:
   branch:
