@@ -8,3 +8,5 @@ services:
       - '5505:5505'
     extra_hosts:
       - 'mongo:host-gateway'
+    environment:
+      - NODE_ENV=development

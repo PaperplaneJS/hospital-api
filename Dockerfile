@@ -1,7 +1,5 @@
 FROM node:14-slim
 
-ENV NODE_ENV=production
-
 RUN rm -rf /app
 RUN mkdir /app
 COPY . /app
