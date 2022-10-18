@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 
-const mongoDBHost = process.env.MONGODB_HOST || 'mongo'
+const mongoDBHost = process.env.NODE_ENV === 'production' ? 'mongo' : 'localhost'
 
 let mongoDB = null
 
@@ -18,5 +18,5 @@ function getDB() {
 
 module.exports = {
   getDB,
-  connect
+  connect,
 }
