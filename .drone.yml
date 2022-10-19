@@ -27,6 +27,7 @@ steps:
       command_timeout: 5m
       script:
         - cd /data/docker/default
+        - sudo docker pull paperplanecc/hospital-be:latest
         - sudo docker-compose up -d
 
 trigger:
