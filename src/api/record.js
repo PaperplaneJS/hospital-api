@@ -21,3 +21,11 @@ server.post('/addRecord', async function (req, res, next) {
 
   return next()
 })
+
+server.get('/listAllRecords', async function (_req, res, next) {
+  const listResult = await db.collection('records').find({}).toArray()
+
+  res.send(successBody(listResult))
+
+  return next()
+})
