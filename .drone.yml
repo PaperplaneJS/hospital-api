@@ -15,6 +15,7 @@ steps:
       password:
         from_secret: DOCKER_PASSWORD
       repo: paperplanecc/hospital-be
+      mirror: https://mirror.ccs.tencentyun.com
       registry: docker.io
       tags: latest
 
