@@ -16,6 +16,8 @@ steps:
         from_secret: DOCKER_PASSWORD
       repo: paperplanecc/hospital-be
       tags: latest
+      mirror: https://mirror.ccs.tencentyun.com
+      registry: docker.io
 
   - name: deploy
     image: appleboy/drone-ssh
