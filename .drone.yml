@@ -45,4 +45,4 @@ volumes:
 
 trigger:
   branch:
-    - master
+  - master
