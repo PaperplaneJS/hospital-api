@@ -7,9 +7,6 @@ workspace:
 steps:
   - name: build
     image: plugins/docker
-    volumes:
-      - name: npmcache
-        path: /usr/local/share/.cache/yarn
     settings:
       username: paperplanecc
       password:
