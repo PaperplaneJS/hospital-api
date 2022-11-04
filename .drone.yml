@@ -27,8 +27,8 @@ steps:
         path: /sshpath
       - name: homepath
         path: /homepath
-    # commands:
-    #   - cp -f /source/docker-compose.yml /homepath/hospital-be-docker-compose.yml
+    commands:
+      - cp -f /source/docker-compose.yml /homepath/hospital-be-docker-compose.yml
     settings:
       host: a-c.fun
       username: ubuntu
