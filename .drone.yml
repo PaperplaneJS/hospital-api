@@ -31,14 +31,14 @@ steps:
       port: 22
       command_timeout: 5m
       script:
-        - cd /data/docker/default
+        - cd /home/ubuntu
         - sudo docker pull paperplanecc/hospital-be:latest
         - sudo docker-compose up -d
 
 volumes:
   - name: npmcache
     host:
-      path: /data/npmcache
+      path: /home/ubuntu/npmcache
   - name: ssh
     host:
       path: /home/ubuntu/drone-deploy-ssh
