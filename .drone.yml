@@ -18,6 +18,7 @@ steps:
       tags: latest
       mirror: https://mirror.ccs.tencentyun.com
       registry: docker.io
+      debug: true
 
   - name: deploy
     image: appleboy/drone-ssh
