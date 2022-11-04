@@ -1,12 +1,14 @@
 version: '3'
 
+networks:
+  be:
+    external: true
+
 services:
   hospital-be:
-    container_name: hospital-be
     image: paperplanecc/hospital-be:latest
-    ports:
-      - '5505:5505'
-    extra_hosts:
-      - 'mongo:host-gateway'
+    container_name: hospital-be
+    networks:
+      - be
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
