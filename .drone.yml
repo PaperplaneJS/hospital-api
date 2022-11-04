@@ -2,7 +2,7 @@ kind: pipeline
 name: default
 
 workspace:
-  path: /home/node/app
+  path: /source
 
 steps:
   - name: build
@@ -25,7 +25,7 @@ steps:
       - name: homepath
         path: /homepath
     commands:
-      - cp -f /home/node/app/docker-compose.yml /homepath/hospital-be-docker-compose.yml
+      - cp -f /source/docker-compose.yml /homepath/hospital-be-docker-compose.yml
     settings:
       host: a-c.fun
       username: ubuntu
