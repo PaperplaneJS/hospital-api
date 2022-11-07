@@ -15,38 +15,19 @@ steps:
       tags: latest
       mirror: https://mirror.ccs.tencentyun.com
       registry: docker.io
-      debug: true
-
+  
   - name: deploy
-    image: appleboy/drone-ssh
-    volumes:
-      - name: ssh
-        path: /sshpath
-      - name: homepath
-        path: /homepath
-    commands:
-      - cp -f /source/docker-compose.yml /homepath/hospital-be-docker-compose.yml
+    image: drillster/drone-rsync
     settings:
-      host: a-c.fun
-      username: ubuntu
-      key_path: /sshpath/id_rsa
-      port: 22
-      command_timeout: 5m
+      hosts: [ "a-c.fun" ]
+      user: ubuntu
+      key:
+        from_secret: DEPLOY_SSH_PRIKEY
+      source: ./docker-compose.yml
+      target: /home/ubuntu/hospital-be-docker-compose.yml
       script:
-        - cd /home/ubuntu
-        - sudo docker pull paperplanecc/hospital-be:latest
-        - sudo docker-compose up -d -f hospital-be-docker-compose.yml
-
-volumes:
-  - name: npmcache
-    host:
-      path: /home/ubuntu/npmcache
-  - name: ssh
-    host:
-      path: /home/ubuntu/drone-deploy-ssh
-  - name: homepath
-    host:
-      path: /homepath
+        - docker pull paperplanecc/hospital-be:latest
+        - docker-compose up -d -f /home/ubuntu/hospital-be-docker-compose.yml
 
 trigger:
   branch:
