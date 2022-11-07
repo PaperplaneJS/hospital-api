@@ -27,9 +27,7 @@ steps:
       target: /home/ubuntu/hospital-be-docker-compose.yml
       script:
         - docker pull paperplanecc/hospital-be:latest
-        - cd /home/ubuntu
-        - export COMPOSE_PROJECT_NAME=ubuntu
-        - docker-compose -f hospital-be-docker-compose.yml up -d
+        - docker-compose -f /home/ubuntu/hospital-be-docker-compose.yml up -d
 
 trigger:
   branch:

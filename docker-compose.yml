@@ -1,7 +1,7 @@
 version: '3'
 
 networks:
-  be:
+  ubuntu_be:
     external: true
 
 services:
@@ -9,6 +9,6 @@ services:
     image: paperplanecc/hospital-be:latest
     container_name: hospital-be
     networks:
-      - be
+      - ubuntu_be
     environment:
       - NODE_ENV=production
