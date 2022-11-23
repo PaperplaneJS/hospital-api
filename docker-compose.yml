@@ -8,6 +8,7 @@ services:
   hospital-be:
     image: paperplanecc/hospital-be:latest
     container_name: hospital-be
+    restart: always
     networks:
       - ubuntu_be
     environment:
