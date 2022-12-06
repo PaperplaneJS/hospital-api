@@ -13,8 +13,7 @@ async function connect() {
 }
 
 /**
- * @typedef { import("mongodb").Db } Db
- * @return {Db}
+ * @return {import("mongodb").Db}
  */
 function getDB() {
   return mongoDB
