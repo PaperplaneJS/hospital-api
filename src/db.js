@@ -12,6 +12,10 @@ async function connect() {
   mongoDB = client.db('hospital')
 }
 
+/**
+ * @typedef { import("mongodb").Db } Db
+ * @return {Db}
+ */
 function getDB() {
   return mongoDB
 }
