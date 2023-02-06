@@ -19,16 +19,16 @@ steps:
   - name: deploy
     image: drillster/drone-rsync
     settings:
-      hosts: [ "a-c.fun" ]
+      hosts: [ "paperplane.cc" ]
       user: ubuntu
       key:
         from_secret: DEPLOY_SSH_PRIKEY
       source: ./docker-compose.yml
       target: /home/ubuntu/hospital-be-docker-compose.yml
       script:
-        - docker-compose -f /home/ubuntu/hospital-be-docker-compose.yml down
+        - docker compose -f /home/ubuntu/hospital-be-docker-compose.yml down
         - docker image rm paperplanecc/hospital-be:latest
-        - docker-compose -f /home/ubuntu/hospital-be-docker-compose.yml up -d
+        - docker compose -f /home/ubuntu/hospital-be-docker-compose.yml up -d
 
 trigger:
   branch:

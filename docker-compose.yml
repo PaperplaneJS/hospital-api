@@ -1,7 +1,11 @@
 version: '3'
 
 networks:
-  be:
+  default-app:
+    name: default-app
+    external: true
+  default-db-mongo:
+    name: default-db-mongo
     external: true
 
 services:
@@ -10,6 +14,7 @@ services:
     container_name: hospital-be
     restart: always
     networks:
-      - be
+      - default-app
+      - default-db-mongo
     environment:
       - NODE_ENV=production
