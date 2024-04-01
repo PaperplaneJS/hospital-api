@@ -5,30 +5,52 @@ workspace:
   path: /source
 
 steps:
-  - name: build
-    image: plugins/docker
+  - name: build-image
+    image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+      - name: imagedir
+        path: /imagedir
+    commands:
+      - docker build -t paperplanecc/hospital-api:latest .
+      - docker image save paperplanecc/hospital-api:latest > /imagedir/hospital-api.tar
+
+  - name: prepare-docker
+    image: appleboy/drone-ssh
     settings:
-      username: paperplanecc
-      password:
-        from_secret: DOCKER_PASSWORD
-      repo: paperplanecc/hospital-be
-      tags: latest
-      mirror: https://mirror.ccs.tencentyun.com
-      registry: docker.io
-  
-  - name: deploy
-    image: drillster/drone-rsync
-    settings:
-      hosts: [ "paperplane.cc" ]
-      user: ubuntu
+      host:
+        - 'paperplane.cc'
+      username: root
       key:
         from_secret: DEPLOY_SSH_PRIKEY
-      source: ./docker-compose.yml
-      target: /home/ubuntu/hospital-be-docker-compose.yml
+      command_timeout: 5m
       script:
-        - docker compose -f /home/ubuntu/hospital-be-docker-compose.yml down
-        - docker image rm paperplanecc/hospital-be:latest
-        - docker compose -f /home/ubuntu/hospital-be-docker-compose.yml up -d
+        - docker stop hospital-api || true
+        - docker rm hospital-api || true
+        - docker image rm paperplanecc/hospital-api:latest || true
+        - docker image load < /root/images-export/hospital-api.tar
+
+  - name: deploy
+    image: appleboy/drone-ssh
+    settings:
+      host:
+        - 'paperplane.cc'
+      username: root
+      key:
+        from_secret: DEPLOY_SSH_PRIKEY
+      command_timeout: 5m
+      script:
+        - cd /root/project-config/hospital
+        - docker compose up -d
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
+  - name: imagedir
+    host:
+      path: /root/images-export
 
 trigger:
   branch:
