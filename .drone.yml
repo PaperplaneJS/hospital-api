@@ -10,26 +10,22 @@ steps:
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
-      - name: imagedir
-        path: /imagedir
+      - name: yarncache
+        path: /usr/local/share/.cache/yarn
     commands:
-      - docker build -t paperplanecc/hospital-api:latest .
-      - docker image save paperplanecc/hospital-api:latest > /imagedir/hospital-api.tar
+      - docker build --progress plain --compress -t paperplanecc/hospital-api:ci .
 
   - name: prepare-docker
-    image: appleboy/drone-ssh
-    settings:
-      host:
-        - 'paperplane.cc'
-      username: root
-      key:
-        from_secret: DEPLOY_SSH_PRIKEY
-      command_timeout: 5m
-      script:
-        - docker stop hospital-api || true
-        - docker rm hospital-api || true
-        - docker image rm paperplanecc/hospital-api:latest || true
-        - docker image load < /root/images-export/hospital-api.tar
+    image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - docker stop hospital-api || true
+      - docker rm hospital-api || true
+      - docker image rm paperplanecc/hospital-api:latest || true
+      - docker tag paperplanecc/hospital-api:ci paperplanecc/hospital-api:latest || true
+      - docker image rm paperplanecc/hospital-api:ci || true
 
   - name: deploy
     image: appleboy/drone-ssh
@@ -48,9 +44,9 @@ volumes:
   - name: dockersock
     host:
       path: /var/run/docker.sock
-  - name: imagedir
+  - name: yarncache
     host:
-      path: /root/images-export
+      path: /root/.yarncache
 
 trigger:
   branch:
